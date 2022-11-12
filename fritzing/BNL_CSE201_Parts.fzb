@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module fritzingVersion="0.9.10b.2022-07-01.CD-2134-0-40d23c29" icon="Mine.png">
+    <title>CSE201</title>
+    <instances>
+        <instance moduleIdRef="13f88e58b86d08d73d112f0fb05e6968" modelIndex="85439961" path="C:/Users/dbier/AppData/Local/Programs/Fritzing/fritzing-parts/core/Half_breadboard.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="adafruit_7754a88b2f09d72d9d818198344c96b7_2" modelIndex="85439968" path="C:/Users/dbier/Documents/Fritzing/parts/user/adafruit_7754a88b2f09d72d9d818198344c96b7_2.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="adafruit_b21ee4c5056f980ff4c35523d2cbe416_1" modelIndex="85440025" path="C:/Users/dbier/Documents/Fritzing/parts/user/adafruit_b21ee4c5056f980ff4c35523d2cbe416_1.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="adafruit_6fe3b770536e6871eeb3c579abbe31cc_1" modelIndex="85440051" path="C:/Users/dbier/Documents/Fritzing/parts/user/adafruit_6fe3b770536e6871eeb3c579abbe31cc_1.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="5BandResistorModuleID" modelIndex="85512090" path="C:/Users/dbier/AppData/Local/Programs/Fritzing/fritzing-parts/core/resistor_5band.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="AD9833_Module_deca5fa0fc0d30b3cd405b4967ff59b0_1" modelIndex="85512173" path="C:/Users/dbier/Documents/Fritzing/parts/user/AD9833_Module_deca5fa0fc0d30b3cd405b4967ff59b0_1.fzp" flippedSMD="true">
+            <property name="flippedSMD" value="true"/>
+            <views/>
+        </instance>
+        <instance moduleIdRef="AD9833_Module_deca5fa0fc0d30b3cd405b4967ff59b0_1" modelIndex="85512274" path="C:/Users/dbier/Documents/Fritzing/parts/user/AD9833_Module_deca5fa0fc0d30b3cd405b4967ff59b0_1.fzp" flippedSMD="true">
+            <property name="flippedSMD" value="true"/>
+            <views/>
+        </instance>
+        <instance moduleIdRef="LM393N_2f06d65b0d4bc0fe3c45d28fe7671afc_5" modelIndex="85512824" path="C:/Users/dbier/Documents/Fritzing/parts/user/LM393N_2f06d65b0d4bc0fe3c45d28fe7671afc_5.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="Adafruit-_2c6c948fc2eb5773329f8c0b9342d161_1" modelIndex="85514384" path="C:/Users/dbier/Documents/Fritzing/parts/user/Adafruit-_2c6c948fc2eb5773329f8c0b9342d161_1.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="5BandResistorModuleID" modelIndex="85514940" path="C:/Users/dbier/AppData/Local/Programs/Fritzing/fritzing-parts/core/resistor_5band.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-DiscreteSemi-DIODE-PTH_v2" modelIndex="85515108" path="C:/Users/dbier/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-discretesemi-diode-pth_v2.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="Adafruit-_4dfd14f82b6af3cab826504383ee4e41_1" modelIndex="85516360" path="C:/Users/dbier/Documents/Fritzing/parts/user/Adafruit-_4dfd14f82b6af3cab826504383ee4e41_1.fzp">
+            <views/>
+        </instance>
+    </instances>
+</module>
