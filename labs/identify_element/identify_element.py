@@ -45,6 +45,9 @@ def main():
     ax.set_ylabel(r"$Volume\;(m^3)$")
     ax.set_xlim(0, 500)
     ax.set_ylim(0, 0.025)
+    
+    ax.figure.set_size_inches(10, 8)
+    plt.savefig("identify_element.png", dpi=600)    
 
     plt.show()
 

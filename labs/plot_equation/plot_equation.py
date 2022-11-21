@@ -26,6 +26,9 @@ def main():
     ax.axhline(V_s, color="yellow", linewidth=2)
 
     ax.grid(which="both", color="gray", linestyle="dotted", alpha=0.5)
+    
+    ax.figure.set_size_inches(10, 8)
+    plt.savefig("plot_equation.png", dpi=600)    
 
     plt.show()
 
