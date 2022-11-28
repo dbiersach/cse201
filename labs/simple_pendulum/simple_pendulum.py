@@ -45,7 +45,7 @@ def main():
             omega[step], theta[step], time[step], delta_time, d_omega, d_theta
         )
 
-    ax.plot(time, theta, zorder=3)
+    ax.plot(time, theta, color="blue", linewidth=2, zorder=3)
 
     ax.set_title("Simple Pendulum (Euler's Method)")
     ax.set_xlabel("time (secs)")
@@ -55,9 +55,9 @@ def main():
 
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())
-    
+
     ax.figure.set_size_inches(10, 8)
-    plt.savefig("simple_pendulum.png", dpi=600)    
+    plt.savefig("simple_pendulum.png", dpi=600)
 
     plt.show()
 

@@ -36,14 +36,14 @@ def main():
         (time_initial, time_final),
         [s_initial, i_initial, r_initial],
         max_step=0.01,
-        args=[beta, delta],
+        args=(beta, delta),
     )
     time_steps = sol.t
     s, i, r = sol.y
 
-    ax.plot(time_steps, s, label="Susceptible")
-    ax.plot(time_steps, i, label="Infected")
-    ax.plot(time_steps, r, label="Recovered")
+    ax.plot(time_steps, s, linewidth=2, label="Susceptible")
+    ax.plot(time_steps, i, linewidth=2, label="Infected")
+    ax.plot(time_steps, r, linewidth=2, label="Recovered")
 
     ax.set_title("Epidemiology (Kermack-McKendrick)")
     ax.set_xlabel("Time (months)")

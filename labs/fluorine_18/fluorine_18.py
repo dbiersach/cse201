@@ -7,6 +7,7 @@ from matplotlib.ticker import AutoMinorLocator
 # Fluorine-18 half life (hrs)
 tau = 1.829
 
+
 def d_n(n):
     return -n / tau
 
@@ -38,7 +39,7 @@ def main():
             nuclei[step], time[step], delta_time, d_n
         )
 
-    ax.plot(time, nuclei)
+    ax.plot(time, nuclei, color="red", linewidth=2)
 
     ax.set_title("Fluorine-18 Radioactive Decay (Euler's Method)")
     ax.set_xlabel("time (hrs)")
@@ -46,9 +47,9 @@ def main():
 
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())
-    
+
     ax.figure.set_size_inches(10, 8)
-    plt.savefig("fluorine_18.png", dpi=600)        
+    plt.savefig("fluorine_18.png", dpi=600)
 
     plt.show()
 

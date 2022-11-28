@@ -20,8 +20,7 @@ def euler(v1, v2, u, h, f1, f2):
     # with two dependent variables (v1, v2) and the
     # independent variable (u) having step size (h)
     next_v1 = v1 + f1(v1, v2, u) * h
-    # Cromer's fix to Euler's Method for oscillatory systems
-    next_v2 = v2 + f2(next_v1, v2, u) * h
+    next_v2 = v2 + f2(next_v1, v2, u) * h # Cromer's fix
     u += h
     return next_v1, next_v2, u
 
@@ -46,7 +45,7 @@ def main():
             omega[step], theta[step], time[step], delta_time, d_omega, d_theta
         )
 
-    ax.plot(time, theta, zorder=3)
+    ax.plot(time, theta, color='blue', linewidth=2, zorder=3)
 
     ax.set_title("Simple Pendulum (Euler-Cromer Method)")
     ax.set_xlabel("time (secs)")

@@ -70,7 +70,7 @@ def main():
         theta_underdamped,
         label="underdamped",
         color="red",
-        linestyle="solid",
+        linewidth=2,
         zorder=3,
     )
     ax.plot(
@@ -78,7 +78,7 @@ def main():
         theta_overdamped,
         label="overdamped",
         color="blue",
-        linestyle="solid",
+        linewidth=2,
         zorder=3,
     )
     ax.plot(
@@ -86,7 +86,7 @@ def main():
         theta_critically_damped,
         label="critically damped",
         color="green",
-        linestyle="solid",
+        linewidth=2,
         zorder=3,
     )
 
@@ -97,7 +97,7 @@ def main():
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())
     ax.legend(loc="upper right")
-    
+
     ax.figure.set_size_inches(10, 8)
     plt.savefig("damped_pendulum.png", dpi=600)
 
