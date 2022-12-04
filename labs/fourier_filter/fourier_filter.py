@@ -107,7 +107,7 @@ def main():
 
     plot_samples(ax1, ts, ys)
     plot_dft(ax2, ct)
-    plot_idft(ax3, ts, yr)
+    plot_idft(ax3, ts, np.real(yr))
     plot_power_spectrum(ax4, ct)
 
     fig.savefig("fourier_filter.png", dpi=600)

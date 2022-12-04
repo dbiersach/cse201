@@ -71,8 +71,8 @@ def plot_power_spectrum(ax, ct):
 
 def main():
     file_name = "space_signal1"
-    #file_name = "space_signal2"
-    #file_name = "space_signal3"
+    # file_name = "space_signal2"
+    # file_name = "space_signal3"
 
     plt.rcParams["figure.constrained_layout.use"] = True
     fig, (((ax1), (ax2)), ((ax3), (ax4))) = plt.subplots(2, 2)
@@ -88,7 +88,7 @@ def main():
 
     plot_samples(ax1, ts, ys)
     plot_dft(ax2, ct)
-    plot_idft(ax3, ts, yr)
+    plot_idft(ax3, ts, np.real(yr))
     plot_power_spectrum(ax4, ct)
 
     fig.savefig(f"{file_name}.png", dpi=600)

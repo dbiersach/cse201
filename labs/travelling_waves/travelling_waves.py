@@ -71,7 +71,7 @@ def plot_waves(label, show_waves):
         anim_draw_frame,
         anim_frame_counter,
         interval=25,
-        blit=True,
+        blit=False,
         repeat=False,
     )
 
