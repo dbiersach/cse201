@@ -9,8 +9,7 @@ def fit_linear(vec_x, vec_y):
     vec_x = vec_x.reshape(-1, 1)
     model = LinearRegression().fit(vec_x, vec_y)
     m = model.coef_
-    b = model.intercept_
-    return m, b
+    return m
 
 
 def main():
@@ -23,7 +22,7 @@ def main():
     vec_volume_liters = np.array([11.6, 14.0, 16.2, 19.4, 21.8])
     vec_volume_meters_cubed = vec_volume_liters / 1000
 
-    m, b = fit_linear(vec_temperature_kelvin, vec_volume_meters_cubed)
+    m = fit_linear(vec_temperature_kelvin, vec_volume_meters_cubed)
 
     slope = m[0]  # Ratio of V to T (slope of best-fit V/T line)
 
@@ -38,16 +37,16 @@ def main():
     print("      Molar mass of Argon: 39.948u")
 
     x = np.linspace(0, 500, 1000)
-    ax.plot(x, m * x + b)
+    ax.plot(x, m * x)
     ax.scatter(vec_temperature_kelvin, vec_volume_meters_cubed, color="red")
     ax.set_title(f"Unknown Gas ({molar_mass:.3f}u)")
     ax.set_xlabel(r"$Temperature\;(\degree K)$")
     ax.set_ylabel(r"$Volume\;(m^3)$")
     ax.set_xlim(0, 500)
     ax.set_ylim(0, 0.025)
-    
+
     ax.figure.set_size_inches(10, 8)
-    plt.savefig("identify_element.png", dpi=600)    
+    plt.savefig("identify_element.png", dpi=600)
 
     plt.show()
 
