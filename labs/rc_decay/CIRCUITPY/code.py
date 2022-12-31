@@ -35,8 +35,6 @@ def usb_writeline(usb_data_port, x):
 
 
 def read_samples():
-    pixel_builtin.fill((255, 0, 0))  # RED
-
     # Set number of samples (NOT number of seconds!)
     n1 = 1000
     n2 = n1 * 2
