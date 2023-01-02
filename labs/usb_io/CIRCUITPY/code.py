@@ -36,7 +36,7 @@ def flash_led(color_string):
             pixel_builtin.fill((0, 255, 0))  # GREEN
             time.sleep(0.5)
         elif c == "b":
-            pixel_builtin.fill((0, 0, 255))  # GREEN
+            pixel_builtin.fill((0, 0, 255))  # BLUE
             time.sleep(0.5)
 
         # Prepend character to front of reversed string
