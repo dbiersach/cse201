@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# usb_io.py
 
 import serial
 import traceback
@@ -16,11 +16,11 @@ def main():
 
     ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
     try:
-        port = "COM3"
+        port = "COM9"
         if sys.platform == "linux":
-            port = "/dev/ttyAMA0"
+            port = "/dev/ttyACM1"
         if sys.platform == "darwin":
-            port = "/dev/tty.usbserial-110"
+            port = "/dev/tty.usbmodem2203"
 
         ser.port = port
         ser.open()

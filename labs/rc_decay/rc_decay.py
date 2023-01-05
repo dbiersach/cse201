@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # rc_decay.py
 
 import numpy as np
@@ -124,5 +123,4 @@ def main():
         ser.close()
 
 
-if __name__ == "__main__":
-    main()
+main()
