@@ -2,7 +2,7 @@
 
 # Uses AITRIP AD9833 Signal Generator
 # Uses TLV2462 Omp Amp
-# Uses 10 Ohm & 330 Ohm Resistor (R) Voltage Divider
+# Uses 10 Ohm & 100 Ohm Resistor (R) Voltage Divider
 # Uses 100 mH inductor (L)
 # Uses 100nF capacitor (C)
 
@@ -46,7 +46,7 @@ def read_samples():
     pixel_builtin.fill((255, 0, 0))  # RED
 
     # Set number of samples (NOT number of seconds!)
-    n = 200
+    n = 500
     freq = [float] * n
     volts = [float] * n
 
@@ -54,16 +54,16 @@ def read_samples():
     pixel_builtin.fill((255, 0, 0))
     for i in range(n):
         # Set new sine wave frequency
-        freq[i] = 1000 + i * 5
+        freq[i] = i * 10
         wave_gen.update_freq(freq[i])
         wave_gen.start()
         time.sleep(0.10)
-        # Read 10,000 voltage samples at current frequency
+        # Read 10,000 ADC samples at current frequency
         v = 0
         for _ in range(10_000):
             v += pin_adc.value
-        # TLV2462 Op Amp is only 2.5V rail-to-rail
-        volts[i] = v / 10_000 / 65536 * 2.5
+        # Find average ADC reading and covert to volts
+        volts[i] = v / 10_000 / 65536 * 3.3
 
     # Transfer data over USB data port
     pixel_builtin.fill((255, 255, 0))  # YELLOW

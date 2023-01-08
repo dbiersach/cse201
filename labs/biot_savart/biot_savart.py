@@ -28,7 +28,7 @@ def usb_readline(ser):
 def main():
     ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
     try:
-        port = "COM6"
+        port = "COM13"
         if sys.platform == "linux":
             port = "/dev/ttyAMA0"
         if sys.platform == "darwin":
@@ -71,7 +71,6 @@ def main():
         x = np.linspace(np.min(current), np.max(current), 1000)
         m, b, score = fit_linear(current, field_strength)
         ax.plot(x, m * x + b, label=f"Linear ($R^2$={score:.4f})")
-        print(f"Turn Density = {m[0] / 1000 / 1.256e-3:0.4f}")
 
         # Format the plot
         ax.set_title("Biot-Savart Law")

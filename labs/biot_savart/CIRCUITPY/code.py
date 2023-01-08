@@ -71,15 +71,13 @@ def read_samples():
         volts = 0
         for _ in range(1337):
             volts += pin_adc.value
-        # Convert volts to milliamps via Ohm's law
-        # Note: 0.9852 = 1/1015 ohms * 1000 mA/A
-        # current[i] = volts / 1337 / 65535 * 4.72 * 0.9852
+        # Convert avg volts to milliamps via Ohm's law
         current[i] = volts / 1337 / 65535 * 4.72 / 1015 * 1000
         mag_x, mag_y, mag_z = magnetometer.magnetic
         field_strength[i] = sqrt(mag_x**2 + mag_y**2 + mag_z**2)
 
     # Turn off motor driver (enter sleep state)
-    motor_sleep_pin.value = True
+    motor_sleep_pin.value = False
 
     # Transfer data over USB
     pixel_builtin.fill((255, 255, 0))  # YELLOW
