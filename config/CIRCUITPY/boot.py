@@ -1,4 +1,8 @@
 import usb_cdc
+import usb_hid
+import usb_midi
+usb_midi.disable()
+usb_hid.disable()   
 usb_cdc.enable(console=True, data=True)
-print("CSE201 - BNL Mini-Semester 2023")
+print("CSE201 - BNL Mini-Semester")
 
