@@ -4,5 +4,5 @@ import usb_midi
 usb_midi.disable()
 usb_hid.disable()   
 usb_cdc.enable(console=True, data=True)
-print("CSE201 - BNL Mini-Semester")
+print("BNL OEP")
 
