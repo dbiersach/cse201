@@ -1,49 +1,30 @@
 # usb_io.py
 
 import serial
-import traceback
 import sys
 
+# Ask user for string to send to KB2040
+print("Enter a string containing r, g, or b characters:")
+color_string = input()
 
-def usb_readline(usb_data_port):
-    s = usb_data_port.readline().decode("ASCII").strip()
-    return s
+# Open the USB data port
+ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
+if sys.platform == "win32":
+    ser.port = "COM10"
+if sys.platform == "darwin":
+    ser.port = "/dev/tty.usbserial-110"
+ser.open()
 
+# Convert input to bytes and send to KB2040
+color_string += "\n"
+ser.write(color_string.encode())
 
-def main():
-    print("Enter a string containing r, g, or b characters:")
-    color_string = input()
+# Read and dislay the reversed color string from the KB2040
+reversed_string = ser.readline().decode("ASCII").strip()
+print("The reversed string is:")
+print(reversed_string)
 
-    ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
-    try:
-        port = "COM9"
-        if sys.platform == "linux":
-            port = "/dev/ttyACM1"
-        if sys.platform == "darwin":
-            port = "/dev/tty.usbmodem2203"
-
-        ser.port = port
-        ser.open()
-
-        # Append a linefeed at end of input string
-        color_string += "\n"
-
-        # Convert input to bytes and send to the MCU
-        ser.write(color_string.encode())
-
-        # Read the reversed color string from the MCU
-        reversed_string = usb_readline(ser)
-
-        print("The reversed string is:")
-        print(reversed_string)
-
-    except:
-        print("Error with MCU serial I/O")
-        traceback.print_exc()
-
-    if ser.is_open:
-        # Close the serial port connection to the MCU
-        ser.close()
+ser.close()
 
 
-main()
+

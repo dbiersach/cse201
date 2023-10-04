@@ -30,7 +30,7 @@ n = p / r * slope  # Moles of gas (rearrange ideal gas law equation)
 m_sample = 50  # (given) grams
 molar_mass = m_sample / n  # sample mass divided by number of moles
 
-plt.figure()
+plt.figure("identify_element.py")
 plt.scatter(temperature, volume, color="red")
 t = np.linspace(0, 500)
 plt.plot(t, slope * t + yint)

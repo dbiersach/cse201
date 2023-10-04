@@ -1,4 +1,4 @@
-# rc_decay for KB2040
+ # rc_decay for KB2040
 
 # Uses 10K ohm resistor (1/2 watt, 1% tolerance)
 # Uses 10uF 25V electrolytic capacitor (20% tolerance)

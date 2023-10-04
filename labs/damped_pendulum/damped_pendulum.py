@@ -2,106 +2,51 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.ticker import AutoMinorLocator
-from scipy.integrate import solve_ivp
+
+phase_constant = 9.81 / 1.0  # (m/s^2 = g / pendulum length)
+q = 0.75
 
 
-def model(time, state_vector, phase_constant, damping_constant):
-    omega, theta = state_vector  # unpack dependent variables
-    d_omega = -damping_constant * omega - phase_constant * np.sin(theta)
-    d_theta = omega
-    return d_omega, d_theta
+def d_omega(omega, theta, time):
+    return -q * omega - phase_constant * np.sin(theta)
 
 
-def main():
-    plt.figure(__file__)
-    ax = plt.axes()
+def d_theta(omega, theta, time):
+    return omega
 
-    # Precalculate phase constant
-    pendulum_length = 1.0  # meters
-    phase_constant = 9.81 / pendulum_length
 
-    # Set damping_constants
-    underdamped_constant = 1.0
-    overdamped_constant = pow(phase_constant, 2) / 2.0
-    critically_damped_constant = pow(phase_constant, 2) / 4.0
+def euler(v1, v2, u, h, f1, f2):
+    # Implements Euler's method for linked ODEs (f1, f2),
+    # with two dependent variables (v1, v2) and the
+    # independent variable (u) having step size (h)
+    next_v1 = v1 + f1(v1, v2, u) * h
+    next_v2 = v2 + f2(next_v1, v2, u) * h  # Cromer's fix
+    u += h
+    return next_v1, next_v2, u
 
-    # Set initial conditions
-    omega_initial = 0
-    theta_initial = np.radians(75)  # 75 degrees
 
-    # Set model duration (seconds)
-    time_initial = 0
-    time_final = 15
+time_stop = 10  # Model out to ten seconds
+time_steps = 250
 
-    # Calculate for an underdamped pendulum
-    sol = solve_ivp(
-        model,
-        (time_initial, time_final),
-        [omega_initial, theta_initial],
-        max_step=0.01,
-        args=(phase_constant, underdamped_constant),
-    )
-    time_steps = sol.t
-    theta_underdamped = sol.y[1]
+d_t = time_stop / time_steps
 
-    # Calculate for an overdamped pendulum
-    sol = solve_ivp(
-        model,
-        (time_initial, time_final),
-        [omega_initial, theta_initial],
-        max_step=0.01,
-        args=(phase_constant, overdamped_constant),
-    )
-    theta_overdamped = sol.y[1]
+omega = np.zeros(time_steps)
+theta = np.zeros(time_steps)
+time = np.zeros(time_steps)
 
-    # Calculate for a critically damped pendulum
-    sol = solve_ivp(
-        model,
-        (time_initial, time_final),
-        [omega_initial, theta_initial],
-        max_step=0.01,
-        args=(phase_constant, critically_damped_constant),
-    )
-    theta_critically_damped = sol.y[1]
+theta[0] = np.radians(75)
 
-    ax.plot(
-        time_steps,
-        theta_underdamped,
-        label="underdamped",
-        color="red",
-        linewidth=2,
-        zorder=3,
-    )
-    ax.plot(
-        time_steps,
-        theta_overdamped,
-        label="overdamped",
-        color="blue",
-        linewidth=2,
-        zorder=3,
-    )
-    ax.plot(
-        time_steps,
-        theta_critically_damped,
-        label="critically damped",
-        color="green",
-        linewidth=2,
-        zorder=3,
+for step in range(time_steps - 1):
+    omega[step + 1], theta[step + 1], time[step + 1] = euler(
+        omega[step], theta[step], time[step], d_t, d_omega, d_theta
     )
 
-    ax.set_title("Damped Pendulum")
-    ax.set_xlabel("Time (sec)")
-    ax.set_ylabel("Angular Displacement (radians)")
-    ax.axhline(y=0.0, color="lightgray")
-    ax.xaxis.set_minor_locator(AutoMinorLocator())
-    ax.yaxis.set_minor_locator(AutoMinorLocator())
-    ax.legend(loc="upper right")
-
-    ax.figure.set_size_inches(10, 8)
-    plt.savefig("damped_pendulum.png", dpi=600)
-
-    plt.show()
-
-
-main()
+plt.figure("damped_pendulum.py")
+plt.plot(time, theta, label="theta")
+plt.plot(time, omega, label="omega")
+plt.title("Damped Pendulum (Euler's Method)")
+plt.xlabel("time (secs)")
+plt.ylabel("theta (radians)")
+plt.axhline(y=0.0, color="lightgray", zorder=1)
+plt.legend(loc="upper right")
+plt.show()
