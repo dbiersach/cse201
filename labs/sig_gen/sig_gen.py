@@ -6,15 +6,12 @@ from matplotlib.ticker import MultipleLocator, MaxNLocator
 from matplotlib.ticker import AutoMinorLocator
 from matplotlib.ticker import FormatStrFormatter
 import serial
-import sys
-
+import adafruit_board_toolkit.circuitpython_serial
 
 # Open the USB data port
+cdc_data = adafruit_board_toolkit.circuitpython_serial.data_comports()[0]
 ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
-if sys.platform == "win32":
-    ser.port = "COM10"
-if sys.platform == "darwin":
-    ser.port = "/dev/tty.usbserial-110"
+ser.port = cdc_data.device
 ser.open()
 
 # Send to MCU the command to (r)un the experiment

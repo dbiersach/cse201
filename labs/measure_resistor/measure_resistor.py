@@ -2,19 +2,17 @@
 
 import numpy as np
 import serial
-import sys
+import adafruit_board_toolkit.circuitpython_serial
+
+# Open the USB data port
+cdc_data = adafruit_board_toolkit.circuitpython_serial.data_comports()[0]
+ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
+ser.port = cdc_data.device
+ser.open()
 
 # Ask user which resistor they are measuring
 # Note: 47Ω=1, 56Ω=2, or 68Ω=3
-resistor_num = input("Which resistor are you measuring (1, 2, or 3)?")
-
-# Open the USB data port
-ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
-if sys.platform == "win32":
-    ser.port = "COM10"
-if sys.platform == "darwin":
-    ser.port = "/dev/tty.usbserial-110"
-ser.open()
+resistor_num = input("Which resistor are you measuring? (1, 2, or 3): ")
 
 # Send MCU the command to (r)un the experiment
 ser.write(b"r\n")

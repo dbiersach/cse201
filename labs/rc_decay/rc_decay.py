@@ -7,15 +7,12 @@ from matplotlib.ticker import AutoMinorLocator
 from matplotlib.ticker import FormatStrFormatter
 from matplotlib.collections import LineCollection
 import serial
-import sys
-
+import adafruit_board_toolkit.circuitpython_serial
 
 # Open the USB data port
+cdc_data = adafruit_board_toolkit.circuitpython_serial.data_comports()[0]
 ser = serial.Serial(None, 115200, 8, "N", 1, timeout=120)
-if sys.platform == "win32":
-    ser.port = "COM10"
-if sys.platform == "darwin":
-    ser.port = "/dev/tty.usbserial-110"
+ser.port = cdc_data.device
 ser.open()
 
 # Send to MCU the command to (r)un the experiment
@@ -51,25 +48,25 @@ mid_time = times[-1] / 2
 volts /= 65535
 volts *= 3.3
 
-# Create a plot window
-plt.figure("rc_decay.py")
-plt.gca().set_facecolor("black")
-
-# Plot the measured voltage curve
-plt.plot(times, volts, color="magenta", linewidth=2, label="Actual")
-
-# Plot theoretical charge & decay curves
+# Calculate theoretical performance curve
 V_s = 3.3  # Volts
 R = 10_121  # Ohms
 C = 0.00001069  # Farads
 tau = R * C
-# Charge curve (rise time)
 t = np.linspace(0, mid_time, 100)
-v_c = V_s * (1 - np.exp(-t / tau))
-plt.plot(t, v_c, color="cyan", linewidth=2, label="Theory")
-# Decay curve (fall time)
-v_c = V_s * np.exp(-t / tau)
-plt.plot(t + mid_time, v_c, color="cyan", linewidth=2)
+v1_c = V_s * (1 - np.exp(-t / tau))  # Charge
+v2_c = V_s * np.exp(-t / tau)  # Decay
+
+# Create a plot window
+plt.figure("rc_decay.py")
+plt.gca().set_facecolor("black")
+
+# Plot actual voltage
+plt.plot(times, volts, color="magenta", linewidth=2, label="Actual")
+
+# Plot theoretical voltage
+plt.plot(t, v1_c, color="cyan", linewidth=2, label="Theory")
+plt.plot(t + mid_time, v2_c, color="cyan", linewidth=2)
 
 # Give the graph a title, axis labels, and display the legend
 plt.title("Capacitor Voltage vs. Time")
